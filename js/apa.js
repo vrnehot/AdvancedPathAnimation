@@ -10,6 +10,7 @@ function APA(opt){
 	this.fps = 60;
 	this.path = ''; // svg path element || svg path string
 	this.checkpoints = {}; // { "p":function(){} } where p = 0..1
+	this.speed = 1;
 
 	if(opt){ for(var i in opt)if(opt.hasOwnProperty(i)){ this[i] = opt[i]; } }
 	this.init();
@@ -35,7 +36,7 @@ APA.prototype.update = function(){
 	this.timer = setTimeout(function(){ z.update(); },this.dbf);
 	if(!this.running) return;
 
-	this.elapsed += tslf;
+	this.elapsed += (tslf * this.speed);
 	lp = this.progress;
 	this.progress = this.elapsed / this.duration;
 
@@ -91,4 +92,7 @@ APA.prototype.addCheckpoint = function(p,fn){ this.checkpoints[p] = fn; }
 APA.prototype.setFPS = function(fps){
 	fps = parseInt(fps);
 	if(fps){ this.fps = fps; this.dbf = 1000 / fps; }
+}
+APA.prototype.setSpeed = function(spd){
+	this.speed = parseFloat(spd);
 }
