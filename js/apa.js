@@ -71,7 +71,7 @@ APA.prototype.checkPoints = function(min,max){
 	var point;
 	for(var i in this.checkpoints)if(this.checkpoints.hasOwnProperty(i)){
 		point = this.checkpoints[i];
-		if(i > min && i < max && typeof point == 'function'){ point.call( this ); }
+		if(i >= min && i < max && typeof point == 'function'){ point.call( this ); }
 	}
 }
 APA.prototype.pointAt = function(progress){ return this.path.getPointAtLength( this.len * progress ); }
